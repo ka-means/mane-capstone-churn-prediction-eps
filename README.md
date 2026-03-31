@@ -8,7 +8,7 @@
 >
 > This repository is published solely to document a personal learning and knowledge-building process. It is **not intended for reproduction, redistribution, or commercial use** of any kind. The intellectual property of this work belongs to the members of **Group 11** as its authors. The client organisation is referred to as **EPS ABC** in accordance with a confidentiality agreement. Source data files are not included in this repository.
 >
-> This was a **collaborative group project**; the content presented here reflects exclusively the author's own contributions. The work of co-authors is acknowledged but not reproduced without their consent.
+> This was a **collaborative group project** in which all members contributed equally. This repository is published from Katherin Molina's personal academic portfolio; no individual authorship is claimed over any specific component of the work. Co-authors' contributions are fully acknowledged.
 >
 > **Supervision:** This project was guided and supervised by **Professor Jaime Caiceo** (PUC Chile).
 >
@@ -26,7 +26,8 @@ This project designed and validated an **end-to-end analytical retention system*
 2. Predicts individual 12-month churn probability using supervised classification
 3. Models time-to-churn dynamics using survival analysis
 4. Simulates financial scenarios to quantify the ROI of proactive retention under different budget constraints
-5. Delivers a natural-language interface prototype allowing business users to query the model without technical knowledge
+5. Simulates a natural-language query interface allowing business users to interrogate the model without technical knowledge
+6. Delivers a **production-ready interactive dashboard** (R Shiny) integrating all analytical outputs for operational use by retention teams
 
 **Best model (XGBoost):** AUC = **0.86** · Lift@10% = **3.29** · captures **32% of total churn** by intervening on just **10% of the population**
 
@@ -136,6 +137,32 @@ Scenario modelling under variable retention effectiveness and budget constraints
 
 ---
 
+### Phase 6 — Production-Ready Shiny Dashboard
+(`APP_Permanencia_PAC.R`)
+
+A fully functional **R Shiny dashboard** built for deployment in the EPS ABC retention team's operational workflow. This is not a prototype — it is a complete, styled, multi-module application ready for production use.
+
+**Five modules:**
+
+| Module | Description |
+|---|---|
+| **Introduction** | Executive summary, navigation guide, project context |
+| **Descriptive Analysis** | Interactive portfolio characterisation with dynamic filters across all demographic, geographic, plan and behavioural variables; population pyramid; cancellation rate overlays |
+| **Customer Profiles** | UMAP+HDBSCAN-derived archetypes visualised as interactive pie charts with clickable cluster detail modals; cross-variable behaviour analysis per profile |
+| **Churn & Retention** | SHAP variable importance chart; Kaplan-Meier curves by variable; prioritised churn risk table for active affiliates; individual survival curve per affiliate ID; new-affiliate permanence simulator |
+| **Financial Impact** | Real-time ROI simulation with configurable LTV, call cost, incentive cost, and agent success rate; profitability curve by number of managed affiliates; sensitivity heatmap (incentive × success rate) |
+
+**Technical highlights:**
+- Custom corporate CSS (Barlow font, EPS ABC colour palette) — production-quality UI
+- JavaScript input formatters for currency fields
+- `ranger` (Random Survival Forest) model loaded at runtime from serialised `.rds` artifact
+- `recipes` pipeline for consistent feature preprocessing at inference time
+- `arrow` for high-performance Parquet data loading
+- `plotly` interactive charts throughout; `DT` interactive tables
+- Reactive filter system propagated across all modules
+
+---
+
 ## 📊 Key Findings
 
 ### Structural Phenomena Discovered
@@ -166,16 +193,18 @@ Financial ROI:    302% (net COP $5,732M/year projected)
 
 | Category | Tools |
 |---|---|
-| **Language** | Python 3.x |
-| **Data manipulation** | pandas, numpy |
+| **Languages** | Python 3.x · R |
+| **Data manipulation** | pandas, numpy · dplyr, data.table |
 | **Machine Learning** | scikit-learn, XGBoost |
-| **Survival Analysis** | lifelines, scikit-survival |
+| **Survival Analysis** | lifelines, scikit-survival · ranger (RSF), survival |
 | **Dimensionality Reduction** | UMAP-learn |
 | **Clustering** | HDBSCAN, scikit-learn (K-Means) |
 | **Explainability** | SHAP |
-| **Visualisation** | matplotlib, seaborn, plotly |
+| **Visualisation** | matplotlib, seaborn, plotly · plotly (R), ggplot2 |
+| **Dashboard / Deployment** | R Shiny · shinydashboard · DT |
+| **Feature preprocessing** | recipes (R) |
+| **Data format** | Parquet (`.parquet`) via arrow |
 | **Conversational simulation** | Custom Python scripting (no external LLM connected) |
-| **Data format** | Parquet (`.parquet`) |
 | **Framework** | CRISP-DM |
 
 ---
@@ -191,8 +220,11 @@ seminario-graduacion/
 │   ├── A_4_Modelo_de_Segmentacion_Kmeans.ipynb          ← K-Means segmentation
 │   ├── A_5_Modelo_de_Segmentacion_UMAP_HDBSCAN.ipynb    ← Topology-aware clustering
 │   ├── A_6_Modelo_de_Regresion_y_XGBoost.ipynb          ← Churn prediction + survival
-│   ├── A_7_Preguntele_al_modelo_ABC_EPS.ipynb            ← LLM conversational interface
+│   ├── A_7_Preguntele_al_modelo_ABC_EPS.ipynb            ← Conversational interface simulation
 │   └── A_8_Simulacion_Financiera_EPS_ABC.ipynb           ← Financial scenario simulator
+│
+├── app/
+│   └── APP_Permanencia_PAC.R                             ← Production-ready R Shiny dashboard
 │
 ├── report/
 │   └── Informe_Final_Seminario_3_vFinal.pdf              ← Full technical report (Spanish)
@@ -206,16 +238,16 @@ seminario-graduacion/
 
 ## 👥 Team & Contribution
 
-**Group 11 — Master's in Business Analytics 2025, Cohort [X]**
+**Group 11 — Master's in Business Analytics 2025**
 
-| Member | Role |
-|---|---|
-| Katherin Molina | Data engineering · UMAP/HDBSCAN segmentation · LLM interface prototype · financial simulation |
-| Joan Martinez | [co-author] |
-| Sebastián Cornejo | [co-author] |
-| Andrés Ospina | [co-author] |
+| Member |
+|---|
+| Katherin Molina |
+| Joan Martinez |
+| Sebastián Cornejo |
+| Andrés Ospina |
 
-> *This repository reflects Katherin Molina's individual contributions and perspective. Co-authors' specific work is not reproduced here.*
+> *This repository is published from Katherin Molina's personal academic portfolio. Co-authors' contributions are fully acknowledged.*
 
 ---
 
