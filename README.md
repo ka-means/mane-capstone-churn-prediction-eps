@@ -24,10 +24,9 @@ This project designed and validated an **end-to-end analytical retention system*
 
 1. Segments the customer base into behavioural archetypes using unsupervised topology-aware clustering
 2. Predicts individual 12-month churn probability using supervised classification
-3. Models time-to-churn dynamics using survival analysis
-4. Simulates financial scenarios to quantify the ROI of proactive retention under different budget constraints
-5. Simulates a natural-language query interface allowing business users to interrogate the model without technical knowledge
-6. Delivers a **production-ready interactive dashboard** (R Shiny) integrating all analytical outputs for operational use by retention teams
+3. Calibrates churn scores for reliable probability estimation
+4. Validates model performance with AUC-ROC, Brier Score, and calibration curves — including expected-value financial analysis
+5. Generates interpretable outputs and stakeholder reports via a **production-ready R Shiny dashboard**
 
 **Best model (XGBoost):** AUC = **0.86** · Lift@10% = **3.29** · captures **32% of total churn** by intervening on just **10% of the population**
 
@@ -57,11 +56,11 @@ The PAC operates within the Colombian health system (*SGSSS*) as a voluntary com
 **Primary objective:** Develop an integrated analytical system to identify customer archetypes, predict individual churn probability at 12 months, and model permanence windows — enabling proactive, financially-optimised retention allocation.
 
 **Specific objectives:**
-- Build unsupervised behavioural segmentation to characterise customer archetypes
-- Train and compare churn classifiers (Logistic Regression vs. XGBoost)
-- Implement survival analysis models to estimate time-to-churn distributions
-- Quantify financial impact through scenario simulation
-- Prototype a conversational AI interface for non-technical business users
+1. **Build unsupervised behavioural segmentation** to characterise customer archetypes based on healthcare consumption patterns, operational friction (PQRS), and contractual stability
+2. **Train and compare churn classifiers** (Logistic Regression vs. XGBoost), calibrating the churn score via Platt Scaling or isotonic regression to ensure probabilities accurately reflect real exit risk
+3. **Implement survival analysis models** (Kaplan-Meier, Cox, Random Survival Forest) to estimate time-to-churn distributions and identify critical retention windows
+4. **Validate model performance** using AUC-ROC, Brier Score, and calibration curves, integrating an expected-value analysis that quantifies potential savings and optimises the retention budget across intervention scenarios
+5. **Quantify financial impact through scenario simulation** and generate interpretable visualisations and stakeholder reports highlighting the most influential churn drivers
 
 ---
 
