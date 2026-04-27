@@ -296,3 +296,14 @@ A summary of the three integrated datasets and their variable groups:
 ---
 
 *Part of the [Master's in Business Analytics Portfolio](../README.md) — Pontificia Universidad Católica de Chile*
+
+## 📄 Paper
+
+This repository accompanies the research paper:
+
+**A Multi-Layer Analytical Framework for Customer Retention in Voluntary Health Insurance**
+
+The study proposes an integrated approach combining clustering, explainable machine learning, survival analysis, and financial simulation to address customer churn.
+
+📄 Preprint available at:  
+https://doi.org/10.5281/zenodo.19815868
